@@ -15,7 +15,7 @@ using namespace ::apache::thrift::server;
 using boost::shared_ptr;
 
 using namespace  ::tutorial;
-using namespace  ::shared
+using namespace  ::shared;
 
 class CalculatorHandler : public CalculatorIf {
  public:
