@@ -38,4 +38,5 @@ service Twitter {
     void ping(),
     bool postTweet(1:Tweet tweet) throws (1:TwitterUnavailable unavailable),
     TweetSearchResult searchTweets(1:string query);
-    onew
+    oneway void zip()
+}
