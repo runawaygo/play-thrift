@@ -9,7 +9,8 @@
   "repository": "git://github.com/runaway/play-node.git",
   "author": "Tomas Huang <huangguan3112789@gmail.com>",
   "dependencies": {
-    "thrift":""
+    "thrift":"",
+    "connect":""
   },
   "devDependencies": {
     "should": "*",

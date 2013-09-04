@@ -4,13 +4,13 @@
   <title></title>
   <script src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
   <script src="thrift.js"></script>
-  <script src="gen-js/expmple_types.js"></script>
+  <script src="gen-js/example_types.js"></script>
   <script src="gen-js/Twitter.js"></script>
   <script type="text/javascript" charset="utf-8">
     function calc() {
       var transport = new Thrift.Transport("/thrift/service/tutorial/");
       var protocol  = new Thrift.Protocol(transport);
-      var client    = new CalculatorClient(protocol);
+      var client    = new TwitterClient(protocol);
 
       var work = new Work();
       work.num1 = $("#num1").val();
