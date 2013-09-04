@@ -16,3 +16,7 @@ tweet = new ttypes.Tweet(
 client.postTweet tweet, (err, data)->
   console.log err
   console.log data
+  client.searchTweets 'superwolf', (err, data)->
+    console.log err
+    console.log data
+
