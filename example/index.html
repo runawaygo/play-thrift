@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
+  <script src="thrift.js"></script>
+  <script src="gen-js/expmple_types.js"></script>
+  <script src="gen-js/Twitter.js"></script>
+  <script type="text/javascript" charset="utf-8">
+    function calc() {
+      var transport = new Thrift.Transport("/thrift/service/tutorial/");
+      var protocol  = new Thrift.Protocol(transport);
+      var client    = new CalculatorClient(protocol);
+
+      var work = new Work();
+      work.num1 = $("#num1").val();
+      work.num2 = $("#num2").val();
+      work.op = $("#op").val();
+          
+      try {
+        result = client.calculate(1, work);
+        $('#result').val(result);
+        $('#result').css('color', 'black');
+      } catch(ouch){
+        $('#result').val(ouch.why);
+        $('#result').css('color', 'red');
+      }
+    }
+    window.onload = function(){
+      calc();
+    }
+  </script>
+</head>
+<body>
+  <input id="num1" />
+  <br/>
+  <input id="op" />
+  <br/>
+  <input id="num2" />
+  <br/>
+  <input id="result" />
+</body>
+</html>

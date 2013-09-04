@@ -1,0 +1,5 @@
+connect = require("connect")
+connect()
+.use(connect.logger())
+.use('/', connect.static('/'))
+.listen(8000)
