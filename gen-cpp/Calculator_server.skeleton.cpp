@@ -85,15 +85,18 @@ protected:
 };
 
 int main(int argc, char **argv) {
-  int port = 9090;
-  shared_ptr<CalculatorHandler> handler(new CalculatorHandler());
-  shared_ptr<TProcessor> processor(new CalculatorProcessor(handler));
-  shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
-  shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
-  shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
+  shared_ptr protocolFactory(new TBinaryProtocolFactory());
+  shared_ptr handler(new CalculatorHandler());
+  shared_ptr processor(new CalculatorProcessor(handler));
+  shared_ptr serverTransport(new TServerSocket(9090));
+  shared_ptr transportFactory(new TBufferedTransportFactory());
+  
+  TSimpleServer server(processor, 
+                       serverTransport, 
+                       transportFactory, 
+                       protocolFactory);
 
-  TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
+  printf("Starting the server...\n");
   server.serve();
-  return 0;
 }
 
