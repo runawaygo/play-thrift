@@ -7,10 +7,11 @@
   <script src="gen-js/example_types.js"></script>
   <script src="gen-js/Twitter.js"></script>
   <script type="text/javascript" charset="utf-8">
+    var transport = new Thrift.Transport("http://a-server:9090");
+    var protocol  = new Thrift.Protocol(transport);
+    var client    = new TwitterClient(protocol);
+    
     function calc() {
-      var transport = new Thrift.Transport("http://a-server:9090");
-      var protocol  = new Thrift.Protocol(transport);
-      var client    = new TwitterClient(protocol);
       
       var tweetObj = {
         userId: parseInt(Math.random()*1000),
