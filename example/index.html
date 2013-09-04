@@ -11,18 +11,21 @@
       var transport = new Thrift.Transport("/thrift/service/tutorial/");
       var protocol  = new Thrift.Protocol(transport);
       var client    = new TwitterClient(protocol);
+      
+      var tweetObj = {
+        userId: parseInt Math.random()*1000,
+        userName: "superwolf",
+        text:"hello world!"
+      }
 
-      var work = new Work();
-      work.num1 = $("#num1").val();
-      work.num2 = $("#num2").val();
-      work.op = $("#op").val();
-          
+      var tweet = new Tweet(tweetObj)
+
       try {
-        result = client.calculate(1, work);
-        $('#result').val(result);
+        result = client.postTweet(tweet);
+        $('#result').append(result);
         $('#result').css('color', 'black');
       } catch(ouch){
-        $('#result').val(ouch.why);
+        $('#result').append(ouch.why);
         $('#result').css('color', 'red');
       }
     }
@@ -32,12 +35,7 @@
   </script>
 </head>
 <body>
-  <input id="num1" />
-  <br/>
-  <input id="op" />
-  <br/>
-  <input id="num2" />
-  <br/>
-  <input id="result" />
+  <input id="msg" />
+  <div id="result"></div>
 </body>
 </html>
