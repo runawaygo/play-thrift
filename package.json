@@ -1,0 +1,26 @@
+{
+  "name": "play-thrift",
+  "version": "0.1.1",
+  "description": "High performance middleware framework",
+  "keywords": [
+    "thrit",
+    "nodejs"
+  ],
+  "repository": "git://github.com/runaway/play-node.git",
+  "author": "Tomas Huang <huangguan3112789@gmail.com>",
+  "dependencies": {
+    "thrift":""
+  },
+  "devDependencies": {
+    "should": "*",
+    "mocha": "*",
+    "coffee-script":"*"
+  },
+  "main": "index",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "mocha --compilers coffee:coffee-script --reporter spec --timeout 600 test"
+  }
+}
