@@ -28,6 +28,8 @@
         $('#result').append(ouch.why);
         $('#result').css('color', 'red');
       }
+      var result = client.searchTweets('superwolf');
+      console.log(result);
     }
     window.onload = function(){
       $('#postMsg').click(function(){
@@ -37,7 +39,7 @@
   </script>
 </head>
 <body>
-  <input id="postMsg"  type="button" />
+  <input id="postMsg" value="post msg" type="button" />
   <div id="result"></div>
 </body>
 </html>
