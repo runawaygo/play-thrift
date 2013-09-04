@@ -30,17 +30,23 @@ class TwitterHandler : virtual public TwitterIf {
   bool postTweet(const Tweet& tweet) {
     // Your implementation goes here
     printf("postTweet\n");
+    tl.push_back(tweet);
+    return true;
   }
 
   void searchTweets(TweetSearchResult& _return, const std::string& query) {
     // Your implementation goes here
     printf("searchTweets\n");
+    _return = new TweetSearchResult();
+    _return.__set_tweets(tl);
   }
 
   void zip() {
     // Your implementation goes here
     printf("zip\n");
   }
+protected:
+  TweetList tl;
 
 };
 
@@ -54,6 +60,7 @@ int main(int argc, char **argv) {
 
   TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
   server.serve();
+  printf("Start server at port 9090")
   return 0;
 }
 
