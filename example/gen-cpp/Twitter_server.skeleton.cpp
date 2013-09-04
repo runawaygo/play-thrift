@@ -37,7 +37,6 @@ class TwitterHandler : virtual public TwitterIf {
   void searchTweets(TweetSearchResult& _return, const std::string& query) {
     // Your implementation goes here
     printf("searchTweets\n");
-    _return = new TweetSearchResult();
     _return.__set_tweets(tl);
   }
 
@@ -60,7 +59,7 @@ int main(int argc, char **argv) {
 
   TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
   server.serve();
-  printf("Start server at port 9090")
+  printf("Start server at port 9090");
   return 0;
 }
 
