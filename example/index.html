@@ -30,12 +30,14 @@
       }
     }
     window.onload = function(){
-      calc();
+      $('#postMsg').click(function(){
+        calc();
+      });
     }
   </script>
 </head>
 <body>
-  <input id="msg" />
+  <input id="postMsg"  type="button" />
   <div id="result"></div>
 </body>
 </html>
