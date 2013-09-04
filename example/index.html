@@ -8,12 +8,12 @@
   <script src="gen-js/Twitter.js"></script>
   <script type="text/javascript" charset="utf-8">
     function calc() {
-      var transport = new Thrift.Transport("/thrift/service/tutorial/");
+      var transport = new Thrift.Transport("http://a-server:9090");
       var protocol  = new Thrift.Protocol(transport);
       var client    = new TwitterClient(protocol);
       
       var tweetObj = {
-        userId: parseInt Math.random()*1000,
+        userId: parseInt(Math.random()*1000),
         userName: "superwolf",
         text:"hello world!"
       }
