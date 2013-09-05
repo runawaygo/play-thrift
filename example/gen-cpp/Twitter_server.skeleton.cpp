@@ -58,13 +58,19 @@ protected:
 
 int main(int argc, char **argv) {
   int port = 9090;
+
   shared_ptr<TwitterHandler> handler(new TwitterHandler());
   shared_ptr<TProcessor> processor(new TwitterProcessor(handler));
   shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
   shared_ptr<TTransportFactory> transportFactory(new THttpServerTransportFactory());
   shared_ptr<TProtocolFactory> protocolFactory(new TJSONProtocolFactory());
 
-  TThreadedServer server(processor, serverTransport, transportFactory, protocolFactory);
+  shared_ptr threadManager = ThreadManager::newSimpleThreadManager(100);
+  shared_ptr threadFactory = shared_ptr(new PosixThreadFactory());
+  threadManager->threadFactory(threadFactory);
+  threadManager->start();
+
+  TThreadPoolServer server(processor, serverTransport, transportFactory, protocolFactory, threadManager);
   server.serve();
   printf("Start server at port 9090");
   return 0;
