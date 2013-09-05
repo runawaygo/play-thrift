@@ -20,17 +20,16 @@
       }
 
       var tweet = new Tweet(tweetObj)
-
-      try {
-        result = client.postTweet(tweet);
-        $('#result').append(result);
-        $('#result').css('color', 'black');
-      } catch(ouch){
-        $('#result').append(ouch.why);
-        $('#result').css('color', 'red');
-      }
-      var result = client.searchTweets('superwolf');
-      console.log(result);
+      client.postTweet(tweet,function(data){
+        console.log(data);
+        console.log(arguments);
+        $('#result').append(data);
+        var result = client.searchTweets('superwolf',function(data){
+          console.log(data);  
+          console.log(arguments);
+          $('#result').append(data);
+        });
+      });  
     }
     window.onload = function(){
       $('#postMsg').click(function(){
