@@ -1,0 +1,12 @@
+namespace cpp shared
+namespace java shared
+namespace perl shared
+namespace node shared
+
+struct SharedStruct
+  i32 key
+  string value
+  string value
+
+service SharedService
+  SharedStruct getStruct(i32 key)
