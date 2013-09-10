@@ -1,7 +1,7 @@
-namespace cpp shared
-namespace java shared
-namespace perl shared
-namespace node shared
+namespace cpp shared.superwolf
+namespace java shared.superwolf
+namespace perl shared.superwolf
+namespace node shared.superwolf
 
 struct SharedStruct
   i32 key

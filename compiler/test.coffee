@@ -1,6 +1,6 @@
 fs = require('fs')
 {Lexer} = require './lexer'
-code = fs.readFileSync(__dirname + '/test.thrift', 'utf-8')
+code = fs.readFileSync(__dirname + '/test.coffeethrift', 'utf-8')
 options = {}
 lexer = new Lexer
 dd = lexer.tokenize code
