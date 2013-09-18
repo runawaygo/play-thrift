@@ -9,12 +9,26 @@
     "stylus": "~0.37.0"
   },
   "devDependencies": {
-    "coffee-script": "~1.6.3"
+    "coffee-script": "~1.6.3",
+    "mocha": "",
+    "chai": ""
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "make test-all",
+    "blanket": {
+      "pattern": "wechat/lib",
+      "data-cover-flags": {
+        "debug": false
+      }
+    },
+    "travis-cov": {
+      "threshold": 98
+    }
   },
   "repository": "",
   "author": "",
-  "license": "BSD"
+  "license": "BSD",
+  "directories": {
+    "test": "test"
+  }
 }
