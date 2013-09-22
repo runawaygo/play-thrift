@@ -1,12 +1,24 @@
-namespace cpp shared.superwolf
-namespace java shared.superwolf
-namespace perl shared.superwolf
-namespace js shared.superwolf
+namespace cpp ytx
+namespace java ytx
+namespace js ytx
 
-struct SharedStruct
-  i32 key
-  string value
+/*  
+ *  0 公共频道
+ *  1 点对点服务频道 
+ */
+struct Channel
+  string id?
+  string name?
+  i32    type
 
-service SharedService
-  SharedStruct getStruct(i32 key)
-  bool saveStrcut(SharedStruct sharedStruct, string serverName)
+
+struct Chat
+  string id
+  string channelId
+  string channelName
+  string datetime
+  string content
+  string fromUserId
+  string fromUsername
+  string toUserId
+  string toUsername

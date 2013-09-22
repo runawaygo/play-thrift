@@ -1,0 +1,12 @@
+namespace cpp shared.superwolf
+namespace java shared.superwolf
+namespace perl shared.superwolf
+namespace js shared.superwolf
+
+struct SharedStruct
+  i32 key
+  string value
+
+service SharedService
+  SharedStruct getStruct(i32 key)
+  bool saveStrcut(SharedStruct sharedStruct, string serverName)

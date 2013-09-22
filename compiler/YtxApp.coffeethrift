@@ -1,0 +1,59 @@
+namespace cpp ytx
+namespace java ytx
+namespace js ytx
+
+struct Channel
+  string id
+  string name
+  /*  
+   *  0 公共频道
+   *  1 点对点服务频道 
+   */
+  i32    type
+
+
+struct Message
+  string id
+  i32 type
+  string channelId
+  string channelName
+  string datetime
+  string content
+  string fromUserId
+  string fromUsername
+  string toUserId?
+  string toUsername?
+
+  
+
+typedef list<Channel> ( cpp.template = "std::list" ) ChannelList
+typedef list<string> ( cpp.template = "std::list" ) UserIdList
+typedef list<string> ( cpp.template = "std::list" ) ChannelIdList
+typedef list<Message> ( cpp.template = "std::list" ) MessageList
+
+service ChatService
+  //获取用户所订阅的频道信息
+  ChannelList getChannelsByUserId(string userId)
+  //获取最后更新时间之后的用户所有订阅频道的更新
+  getChannelsUpdate(string userId, i32 lastUpdateTime)
+  //用户订阅某个频道
+  subscribe(string channelId, string userId)
+  //用户取消订阅某个频道
+  unsubscribe(string channelId, string userId)
+
+  //通过内容创建频道
+  Channel createContentChannel(i32 cmsChannelId)
+  //删除某个频道
+  deleteChannel(string channelId)
+  //向某一个频道添加管理员
+  addAdminIntoChannel(string channelId, UserIdList userIds)
+  //从一个频道中删除管理员
+  removeAdminFromChannel(string channelId, UserIdList userIds)
+
+  //向某个频道推送消息
+  sendMessage(string channelId, string centent)
+  //向某个频道推送内容
+  sendContent(string channelId, i32 contentId)
+  //获取聊天记录
+  MessageList getChatHistory(string userId, string channelId, i32 lastUpdateTime)
+  
