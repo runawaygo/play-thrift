@@ -20,25 +20,37 @@ typedef std::vector<class Channel>  ChannelList;
 
 typedef std::vector<std::string>  UserIdList;
 
+typedef std::vector<std::string>  AdminIdList;
+
+typedef std::vector<std::string>  ChannelIdList;
+
+typedef std::vector<class Message>  MessageList;
+
 typedef struct _Channel__isset {
-  _Channel__isset() : id(false), name(false) {}
+  _Channel__isset() : id(false), name(false), type(false), description(false), memberCount(false) {}
   bool id;
   bool name;
+  bool type;
+  bool description;
+  bool memberCount;
 } _Channel__isset;
 
 class Channel {
  public:
 
-  static const char* ascii_fingerprint; // = "07A9615F837F7D0A952B595DD3020972";
-  static const uint8_t binary_fingerprint[16]; // = {0x07,0xA9,0x61,0x5F,0x83,0x7F,0x7D,0x0A,0x95,0x2B,0x59,0x5D,0xD3,0x02,0x09,0x72};
+  static const char* ascii_fingerprint; // = "EB88F56DA53C89F3E4C84007BA48D308";
+  static const uint8_t binary_fingerprint[16]; // = {0xEB,0x88,0xF5,0x6D,0xA5,0x3C,0x89,0xF3,0xE4,0xC8,0x40,0x07,0xBA,0x48,0xD3,0x08};
 
-  Channel() : id(), name() {
+  Channel() : id(), name(), type(0), description(), memberCount(0) {
   }
 
   virtual ~Channel() throw() {}
 
   std::string id;
   std::string name;
+  int32_t type;
+  std::string description;
+  int32_t memberCount;
 
   _Channel__isset __isset;
 
@@ -50,11 +62,29 @@ class Channel {
     name = val;
   }
 
+  void __set_type(const int32_t val) {
+    type = val;
+  }
+
+  void __set_description(const std::string& val) {
+    description = val;
+  }
+
+  void __set_memberCount(const int32_t val) {
+    memberCount = val;
+  }
+
   bool operator == (const Channel & rhs) const
   {
     if (!(id == rhs.id))
       return false;
     if (!(name == rhs.name))
+      return false;
+    if (!(type == rhs.type))
+      return false;
+    if (!(description == rhs.description))
+      return false;
+    if (!(memberCount == rhs.memberCount))
       return false;
     return true;
   }
@@ -70,6 +100,127 @@ class Channel {
 };
 
 void swap(Channel &a, Channel &b);
+
+typedef struct _Message__isset {
+  _Message__isset() : id(false), type(false), channelId(false), channelName(false), datetime(false), content(false), fromUserId(false), fromUsername(false), toUserId(false), toUsername(false) {}
+  bool id;
+  bool type;
+  bool channelId;
+  bool channelName;
+  bool datetime;
+  bool content;
+  bool fromUserId;
+  bool fromUsername;
+  bool toUserId;
+  bool toUsername;
+} _Message__isset;
+
+class Message {
+ public:
+
+  static const char* ascii_fingerprint; // = "4642FA546D364E94D8E4A26D8BEC635E";
+  static const uint8_t binary_fingerprint[16]; // = {0x46,0x42,0xFA,0x54,0x6D,0x36,0x4E,0x94,0xD8,0xE4,0xA2,0x6D,0x8B,0xEC,0x63,0x5E};
+
+  Message() : id(), type(0), channelId(), channelName(), datetime(), content(), fromUserId(), fromUsername(), toUserId(), toUsername() {
+  }
+
+  virtual ~Message() throw() {}
+
+  std::string id;
+  int32_t type;
+  std::string channelId;
+  std::string channelName;
+  std::string datetime;
+  std::string content;
+  std::string fromUserId;
+  std::string fromUsername;
+  std::string toUserId;
+  std::string toUsername;
+
+  _Message__isset __isset;
+
+  void __set_id(const std::string& val) {
+    id = val;
+  }
+
+  void __set_type(const int32_t val) {
+    type = val;
+  }
+
+  void __set_channelId(const std::string& val) {
+    channelId = val;
+  }
+
+  void __set_channelName(const std::string& val) {
+    channelName = val;
+  }
+
+  void __set_datetime(const std::string& val) {
+    datetime = val;
+  }
+
+  void __set_content(const std::string& val) {
+    content = val;
+  }
+
+  void __set_fromUserId(const std::string& val) {
+    fromUserId = val;
+  }
+
+  void __set_fromUsername(const std::string& val) {
+    fromUsername = val;
+  }
+
+  void __set_toUserId(const std::string& val) {
+    toUserId = val;
+    __isset.toUserId = true;
+  }
+
+  void __set_toUsername(const std::string& val) {
+    toUsername = val;
+    __isset.toUsername = true;
+  }
+
+  bool operator == (const Message & rhs) const
+  {
+    if (!(id == rhs.id))
+      return false;
+    if (!(type == rhs.type))
+      return false;
+    if (!(channelId == rhs.channelId))
+      return false;
+    if (!(channelName == rhs.channelName))
+      return false;
+    if (!(datetime == rhs.datetime))
+      return false;
+    if (!(content == rhs.content))
+      return false;
+    if (!(fromUserId == rhs.fromUserId))
+      return false;
+    if (!(fromUsername == rhs.fromUsername))
+      return false;
+    if (__isset.toUserId != rhs.__isset.toUserId)
+      return false;
+    else if (__isset.toUserId && !(toUserId == rhs.toUserId))
+      return false;
+    if (__isset.toUsername != rhs.__isset.toUsername)
+      return false;
+    else if (__isset.toUsername && !(toUsername == rhs.toUsername))
+      return false;
+    return true;
+  }
+  bool operator != (const Message &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const Message & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+void swap(Message &a, Message &b);
 
 } // namespace
 

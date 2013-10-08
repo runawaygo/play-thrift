@@ -8,9 +8,11 @@ struct Channel
   /*  
    *  0 公共频道
    *  1 点对点服务频道 
+   *  2 文章频道
    */
   i32    type
-
+  string description
+  i32    memberCount
 
 struct Message
   string id
@@ -19,41 +21,56 @@ struct Message
   string channelName
   string datetime
   string content
-  string fromUserId
-  string fromUsername
-  string toUserId?
-  string toUsername?
+  string fromCustomerId
+  string fromCustomername
+  string toCustomerId?
+  string toCustomername?
 
-  
+struct CSRInfo
+  string id
+  string name
+
 
 typedef list<Channel> ( cpp.template = "std::list" ) ChannelList
-typedef list<string> ( cpp.template = "std::list" ) UserIdList
+typedef list<string> ( cpp.template = "std::list" ) CustomerIdList
+typedef list<string> ( cpp.template = "std::list" ) CSRIdList
 typedef list<string> ( cpp.template = "std::list" ) ChannelIdList
 typedef list<Message> ( cpp.template = "std::list" ) MessageList
+typedef map<string, string> ObjectMap
 
-service ChatService
-  //获取用户所订阅的频道信息
-  ChannelList getChannelsByUserId(string userId)
-  //获取最后更新时间之后的用户所有订阅频道的更新
-  getChannelsUpdate(string userId, i32 lastUpdateTime)
-  //用户订阅某个频道
-  subscribe(string channelId, string userId)
-  //用户取消订阅某个频道
-  unsubscribe(string channelId, string userId)
-
+service ChatAdminService
   //通过内容创建频道
-  Channel createContentChannel(i32 cmsChannelId)
+  Channel createChannel(i32 cmsChannelId)
   //删除某个频道
   deleteChannel(string channelId)
   //向某一个频道添加管理员
-  addAdminIntoChannel(string channelId, UserIdList userIds)
+  addAdminIntoChannel(string channelId, CustomerIdList customerIds)
   //从一个频道中删除管理员
-  removeAdminFromChannel(string channelId, UserIdList userIds)
+  removeAdminFromChannel(string channelId, CustomerIdList customerIds)
+  //获取聊天记录
+  MessageList getChatHistory(string customerId, string channelId, i32 lastUpdateTime)
+  //更换一组用户的服务人员
+  replaceCSRForOneGroupCustomers(string oldCSRId, string newCSRId)
+  //更换一个用户的服务人员
+  bindCSR(string customerId, string newCSRId)
+  //设置用户信息
+  setInfo(CSRInfo csrInfo)
 
-  //向某个频道推送消息
-  sendMessage(string channelId, string centent)
+
+service ChatService
+  //获取用户所订阅的频道信息
+  ChannelList getChannelsByCustomerId(string customerId)
+  //获取最后更新时间之后的用户所有订阅频道的更新
+  getChannelsUpdate(string customerId, i32 lastUpdateTime)
+  //用户订阅某个频道
+  subscribe(string channelId, string customerId)
+  //用户取消订阅某个频道
+  unsubscribe(string channelId, string customerId)
+
   //向某个频道推送内容
   sendContent(string channelId, i32 contentId)
   //获取聊天记录
-  MessageList getChatHistory(string userId, string channelId, i32 lastUpdateTime)
-  
+  MessageList getChatHistory(string customerId, string channelId, i32 lastUpdateTime)
+  //最后服务人员的列表
+  CSRIdList getServedAdmins(string customerId, string channelId)
+

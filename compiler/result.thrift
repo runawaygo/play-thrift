@@ -1,65 +1,79 @@
-namespace cpp ytx
 namespace java ytx
 namespace js ytx
-struct Channel{
+struct Customer{
   1:string id
   2:string name
-  /**0公共频道
-*1点对点服务频道
-*/
-  3:i32 type
+  3:string memo
+  4:i32 type
+  5:i32 level
+}
+
+struct CustomerDetail{
+  1:string id
+  2:string name
+  3:string memo
+  4:i32 type
+  5:i32 level
 }
 
 struct Message{
-  1:optional string id
-  2:optional i32 type
-  3:optional string channelId
-  4:string channelName
-  5:string datetime
-  6:string content
-  7:string fromUserId
-  8:string fromUsername
-  9:string toUserId
-  10:optional string toUsername
+  1:string id
+  2:i32 type
+  3:string datetime
+  4:string content
+  5:string csrId
+  6:string csrName
+  7:string customerId
+  8:string customerName
 }
 
-typedef list<Channel> ( cpp.template = "std::list" ) ChannelList
-typedef list<string> ( cpp.template = "std::list" ) UserIdList
-typedef list<string> ( cpp.template = "std::list" ) ChannelIdList
+struct CSRInfo{
+  1:string id
+  2:string name
+  3:string title
+  4:string memo
+}
+
+typedef list<string> ( cpp.template = "std::list" ) CustomerIdList
+typedef list<Customer> ( cpp.template = "std::list" ) CustomerList
+typedef list<string> ( cpp.template = "std::list" ) CSRIdList
 typedef list<Message> ( cpp.template = "std::list" ) MessageList
-service ChatService{
-  //获取用户所订阅的频道信息
-  ChannelList getChannelsByUserId(1:string userId)
+service ICRMService{
+  //绑定用户和CSR
+  void bindCSR(1:string customerId,2:string newCSRId)
 
-  //获取最后更新时间之后的用户所有订阅频道的更新
-  void getChannelsUpdate(1:string userId,2:i32 lastUpdateTime)
+  //更换一个用户的服务人员
+  void replaceCSRForOneGroupCustomers(1:string oldCSRId,2:string newCSRId)
 
-  //用户订阅某个频道
-  void subscribe(1:string channelId,2:string userId)
+  //获取客户信息列表
+  CustomerList getCusomterList(1:CustomerIdList ids)
 
-  //用户取消订阅某个频道
-  void unsubscribe(1:string channelId,2:string userId)
+  //获取客户详细信息
+  Customer getCusomterById(1:string customerId)
 
-  //通过内容创建频道
-  Channel createContentChannel(1:i32 cmsChannelId)
+  //设置用户信息
+  void setCustomerInfo(1:CustomerDetail customerDetail)
 
-  //删除某个频道
-  void deleteChannel(1:string channelId)
+  //获取CSR信息
+  CSRInfo getCSRInfoById(1:string customerId)
 
-  //向某一个频道添加管理员
-  void addAdminIntoChannel(1:string channelId,2:UserIdList userIds)
+}
 
-  //从一个频道中删除管理员
-  void removeAdminFromChannel(1:string channelId,2:UserIdList userIds)
-
-  //向某个频道推送消息
-  void sendMessage(1:string channelId,2:string centent)
-
-  //向某个频道推送内容
-  void sendContent(1:string channelId,2:i32 contentId)
+service ICSRChatMessage{
+  //向这个CSR所负责的所有客户发送消息
+  void sendContent(1:string content,2:string csrId)
 
   //获取聊天记录
-  MessageList getChatHistory(1:string userId,2:string channelId,3:i32 lastUpdateTime)
+  MessageList getChatHistory(1:string customerId,2:i32 lastUpdateTime)
+
+  //获取未读消息
+  MessageList getUnreadMessagesHistory(1:string csrId,2:i32 lastUpdateTime)
+
+}
+
+service ICustomerChatService{
+  //获取聊天记录
+  MessageList getChatHistory(1:string customerId,2:i32 lastUpdateTime)
 
 }
 

@@ -85,19 +85,19 @@ ytx.ChatService_getChannelsByUserId_result.prototype.read = function(input) {
     {
       case 0:
       if (ftype == Thrift.Type.LIST) {
-        var _size0 = 0;
-        var _rtmp34;
+        var _size24 = 0;
+        var _rtmp328;
         this.success = [];
-        var _etype3 = 0;
-        _rtmp34 = input.readListBegin();
-        _etype3 = _rtmp34.etype;
-        _size0 = _rtmp34.size;
-        for (var _i5 = 0; _i5 < _size0; ++_i5)
+        var _etype27 = 0;
+        _rtmp328 = input.readListBegin();
+        _etype27 = _rtmp328.etype;
+        _size24 = _rtmp328.size;
+        for (var _i29 = 0; _i29 < _size24; ++_i29)
         {
-          var elem6 = null;
-          elem6 = new ttypes.Channel();
-          elem6.read(input);
-          this.success.push(elem6);
+          var elem30 = null;
+          elem30 = new ttypes.Channel();
+          elem30.read(input);
+          this.success.push(elem30);
         }
         input.readListEnd();
       } else {
@@ -121,12 +121,12 @@ ytx.ChatService_getChannelsByUserId_result.prototype.write = function(output) {
   if (this.success !== null && this.success !== undefined) {
     output.writeFieldBegin('success', Thrift.Type.LIST, 0);
     output.writeListBegin(Thrift.Type.STRUCT, this.success.length);
-    for (var iter7 in this.success)
+    for (var iter31 in this.success)
     {
-      if (this.success.hasOwnProperty(iter7))
+      if (this.success.hasOwnProperty(iter31))
       {
-        iter7 = this.success[iter7];
-        iter7.write(output);
+        iter31 = this.success[iter31];
+        iter31.write(output);
       }
     }
     output.writeListEnd();
@@ -419,520 +419,6 @@ ytx.ChatService_unsubscribe_result.prototype.write = function(output) {
   return;
 };
 
-ytx.ChatService_createContentChannel_args = function(args) {
-  this.cmsChannelId = null;
-  if (args) {
-    if (args.cmsChannelId !== undefined) {
-      this.cmsChannelId = args.cmsChannelId;
-    }
-  }
-};
-ytx.ChatService_createContentChannel_args.prototype = {};
-ytx.ChatService_createContentChannel_args.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-      if (ftype == Thrift.Type.I32) {
-        this.cmsChannelId = input.readI32();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 0:
-        input.skip(ftype);
-        break;
-      default:
-        input.skip(ftype);
-    }
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-ytx.ChatService_createContentChannel_args.prototype.write = function(output) {
-  output.writeStructBegin('ChatService_createContentChannel_args');
-  if (this.cmsChannelId !== null && this.cmsChannelId !== undefined) {
-    output.writeFieldBegin('cmsChannelId', Thrift.Type.I32, 1);
-    output.writeI32(this.cmsChannelId);
-    output.writeFieldEnd();
-  }
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
-ytx.ChatService_createContentChannel_result = function(args) {
-  this.success = null;
-  if (args) {
-    if (args.success !== undefined) {
-      this.success = args.success;
-    }
-  }
-};
-ytx.ChatService_createContentChannel_result.prototype = {};
-ytx.ChatService_createContentChannel_result.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-      if (ftype == Thrift.Type.STRUCT) {
-        this.success = new ttypes.Channel();
-        this.success.read(input);
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 0:
-        input.skip(ftype);
-        break;
-      default:
-        input.skip(ftype);
-    }
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-ytx.ChatService_createContentChannel_result.prototype.write = function(output) {
-  output.writeStructBegin('ChatService_createContentChannel_result');
-  if (this.success !== null && this.success !== undefined) {
-    output.writeFieldBegin('success', Thrift.Type.STRUCT, 0);
-    this.success.write(output);
-    output.writeFieldEnd();
-  }
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
-ytx.ChatService_deleteChannel_args = function(args) {
-  this.channelId = null;
-  if (args) {
-    if (args.channelId !== undefined) {
-      this.channelId = args.channelId;
-    }
-  }
-};
-ytx.ChatService_deleteChannel_args.prototype = {};
-ytx.ChatService_deleteChannel_args.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-      if (ftype == Thrift.Type.STRING) {
-        this.channelId = input.readString();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 0:
-        input.skip(ftype);
-        break;
-      default:
-        input.skip(ftype);
-    }
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-ytx.ChatService_deleteChannel_args.prototype.write = function(output) {
-  output.writeStructBegin('ChatService_deleteChannel_args');
-  if (this.channelId !== null && this.channelId !== undefined) {
-    output.writeFieldBegin('channelId', Thrift.Type.STRING, 1);
-    output.writeString(this.channelId);
-    output.writeFieldEnd();
-  }
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
-ytx.ChatService_deleteChannel_result = function(args) {
-};
-ytx.ChatService_deleteChannel_result.prototype = {};
-ytx.ChatService_deleteChannel_result.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    input.skip(ftype);
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-ytx.ChatService_deleteChannel_result.prototype.write = function(output) {
-  output.writeStructBegin('ChatService_deleteChannel_result');
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
-ytx.ChatService_addAdminIntoChannel_args = function(args) {
-  this.channelId = null;
-  this.userIds = null;
-  if (args) {
-    if (args.channelId !== undefined) {
-      this.channelId = args.channelId;
-    }
-    if (args.userIds !== undefined) {
-      this.userIds = args.userIds;
-    }
-  }
-};
-ytx.ChatService_addAdminIntoChannel_args.prototype = {};
-ytx.ChatService_addAdminIntoChannel_args.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-      if (ftype == Thrift.Type.STRING) {
-        this.channelId = input.readString();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 2:
-      if (ftype == Thrift.Type.LIST) {
-        var _size8 = 0;
-        var _rtmp312;
-        this.userIds = [];
-        var _etype11 = 0;
-        _rtmp312 = input.readListBegin();
-        _etype11 = _rtmp312.etype;
-        _size8 = _rtmp312.size;
-        for (var _i13 = 0; _i13 < _size8; ++_i13)
-        {
-          var elem14 = null;
-          elem14 = input.readString();
-          this.userIds.push(elem14);
-        }
-        input.readListEnd();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      default:
-        input.skip(ftype);
-    }
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-ytx.ChatService_addAdminIntoChannel_args.prototype.write = function(output) {
-  output.writeStructBegin('ChatService_addAdminIntoChannel_args');
-  if (this.channelId !== null && this.channelId !== undefined) {
-    output.writeFieldBegin('channelId', Thrift.Type.STRING, 1);
-    output.writeString(this.channelId);
-    output.writeFieldEnd();
-  }
-  if (this.userIds !== null && this.userIds !== undefined) {
-    output.writeFieldBegin('userIds', Thrift.Type.LIST, 2);
-    output.writeListBegin(Thrift.Type.STRING, this.userIds.length);
-    for (var iter15 in this.userIds)
-    {
-      if (this.userIds.hasOwnProperty(iter15))
-      {
-        iter15 = this.userIds[iter15];
-        output.writeString(iter15);
-      }
-    }
-    output.writeListEnd();
-    output.writeFieldEnd();
-  }
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
-ytx.ChatService_addAdminIntoChannel_result = function(args) {
-};
-ytx.ChatService_addAdminIntoChannel_result.prototype = {};
-ytx.ChatService_addAdminIntoChannel_result.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    input.skip(ftype);
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-ytx.ChatService_addAdminIntoChannel_result.prototype.write = function(output) {
-  output.writeStructBegin('ChatService_addAdminIntoChannel_result');
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
-ytx.ChatService_removeAdminFromChannel_args = function(args) {
-  this.channelId = null;
-  this.userIds = null;
-  if (args) {
-    if (args.channelId !== undefined) {
-      this.channelId = args.channelId;
-    }
-    if (args.userIds !== undefined) {
-      this.userIds = args.userIds;
-    }
-  }
-};
-ytx.ChatService_removeAdminFromChannel_args.prototype = {};
-ytx.ChatService_removeAdminFromChannel_args.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-      if (ftype == Thrift.Type.STRING) {
-        this.channelId = input.readString();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 2:
-      if (ftype == Thrift.Type.LIST) {
-        var _size16 = 0;
-        var _rtmp320;
-        this.userIds = [];
-        var _etype19 = 0;
-        _rtmp320 = input.readListBegin();
-        _etype19 = _rtmp320.etype;
-        _size16 = _rtmp320.size;
-        for (var _i21 = 0; _i21 < _size16; ++_i21)
-        {
-          var elem22 = null;
-          elem22 = input.readString();
-          this.userIds.push(elem22);
-        }
-        input.readListEnd();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      default:
-        input.skip(ftype);
-    }
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-ytx.ChatService_removeAdminFromChannel_args.prototype.write = function(output) {
-  output.writeStructBegin('ChatService_removeAdminFromChannel_args');
-  if (this.channelId !== null && this.channelId !== undefined) {
-    output.writeFieldBegin('channelId', Thrift.Type.STRING, 1);
-    output.writeString(this.channelId);
-    output.writeFieldEnd();
-  }
-  if (this.userIds !== null && this.userIds !== undefined) {
-    output.writeFieldBegin('userIds', Thrift.Type.LIST, 2);
-    output.writeListBegin(Thrift.Type.STRING, this.userIds.length);
-    for (var iter23 in this.userIds)
-    {
-      if (this.userIds.hasOwnProperty(iter23))
-      {
-        iter23 = this.userIds[iter23];
-        output.writeString(iter23);
-      }
-    }
-    output.writeListEnd();
-    output.writeFieldEnd();
-  }
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
-ytx.ChatService_removeAdminFromChannel_result = function(args) {
-};
-ytx.ChatService_removeAdminFromChannel_result.prototype = {};
-ytx.ChatService_removeAdminFromChannel_result.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    input.skip(ftype);
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-ytx.ChatService_removeAdminFromChannel_result.prototype.write = function(output) {
-  output.writeStructBegin('ChatService_removeAdminFromChannel_result');
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
-ytx.ChatService_sendMessage_args = function(args) {
-  this.channelId = null;
-  this.centent = null;
-  if (args) {
-    if (args.channelId !== undefined) {
-      this.channelId = args.channelId;
-    }
-    if (args.centent !== undefined) {
-      this.centent = args.centent;
-    }
-  }
-};
-ytx.ChatService_sendMessage_args.prototype = {};
-ytx.ChatService_sendMessage_args.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-      if (ftype == Thrift.Type.STRING) {
-        this.channelId = input.readString();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 2:
-      if (ftype == Thrift.Type.STRING) {
-        this.centent = input.readString();
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      default:
-        input.skip(ftype);
-    }
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-ytx.ChatService_sendMessage_args.prototype.write = function(output) {
-  output.writeStructBegin('ChatService_sendMessage_args');
-  if (this.channelId !== null && this.channelId !== undefined) {
-    output.writeFieldBegin('channelId', Thrift.Type.STRING, 1);
-    output.writeString(this.channelId);
-    output.writeFieldEnd();
-  }
-  if (this.centent !== null && this.centent !== undefined) {
-    output.writeFieldBegin('centent', Thrift.Type.STRING, 2);
-    output.writeString(this.centent);
-    output.writeFieldEnd();
-  }
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
-ytx.ChatService_sendMessage_result = function(args) {
-};
-ytx.ChatService_sendMessage_result.prototype = {};
-ytx.ChatService_sendMessage_result.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    input.skip(ftype);
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-ytx.ChatService_sendMessage_result.prototype.write = function(output) {
-  output.writeStructBegin('ChatService_sendMessage_result');
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
 ytx.ChatService_sendContent_args = function(args) {
   this.channelId = null;
   this.contentId = null;
@@ -1133,19 +619,19 @@ ytx.ChatService_getChatHistory_result.prototype.read = function(input) {
     {
       case 0:
       if (ftype == Thrift.Type.LIST) {
-        var _size24 = 0;
-        var _rtmp328;
+        var _size32 = 0;
+        var _rtmp336;
         this.success = [];
-        var _etype27 = 0;
-        _rtmp328 = input.readListBegin();
-        _etype27 = _rtmp328.etype;
-        _size24 = _rtmp328.size;
-        for (var _i29 = 0; _i29 < _size24; ++_i29)
+        var _etype35 = 0;
+        _rtmp336 = input.readListBegin();
+        _etype35 = _rtmp336.etype;
+        _size32 = _rtmp336.size;
+        for (var _i37 = 0; _i37 < _size32; ++_i37)
         {
-          var elem30 = null;
-          elem30 = new ttypes.Message();
-          elem30.read(input);
-          this.success.push(elem30);
+          var elem38 = null;
+          elem38 = new ttypes.Message();
+          elem38.read(input);
+          this.success.push(elem38);
         }
         input.readListEnd();
       } else {
@@ -1169,12 +655,153 @@ ytx.ChatService_getChatHistory_result.prototype.write = function(output) {
   if (this.success !== null && this.success !== undefined) {
     output.writeFieldBegin('success', Thrift.Type.LIST, 0);
     output.writeListBegin(Thrift.Type.STRUCT, this.success.length);
-    for (var iter31 in this.success)
+    for (var iter39 in this.success)
     {
-      if (this.success.hasOwnProperty(iter31))
+      if (this.success.hasOwnProperty(iter39))
       {
-        iter31 = this.success[iter31];
-        iter31.write(output);
+        iter39 = this.success[iter39];
+        iter39.write(output);
+      }
+    }
+    output.writeListEnd();
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+ytx.ChatService_getServedAdmins_args = function(args) {
+  this.userId = null;
+  this.channelId = 'superwolf';
+  if (args) {
+    if (args.userId !== undefined) {
+      this.userId = args.userId;
+    }
+    if (args.channelId !== undefined) {
+      this.channelId = args.channelId;
+    }
+  }
+};
+ytx.ChatService_getServedAdmins_args.prototype = {};
+ytx.ChatService_getServedAdmins_args.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.STRING) {
+        this.userId = input.readString();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 2:
+      if (ftype == Thrift.Type.STRING) {
+        this.channelId = input.readString();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+ytx.ChatService_getServedAdmins_args.prototype.write = function(output) {
+  output.writeStructBegin('ChatService_getServedAdmins_args');
+  if (this.userId !== null && this.userId !== undefined) {
+    output.writeFieldBegin('userId', Thrift.Type.STRING, 1);
+    output.writeString(this.userId);
+    output.writeFieldEnd();
+  }
+  if (this.channelId !== null && this.channelId !== undefined) {
+    output.writeFieldBegin('channelId', Thrift.Type.STRING, 2);
+    output.writeString(this.channelId);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+ytx.ChatService_getServedAdmins_result = function(args) {
+  this.success = null;
+  if (args) {
+    if (args.success !== undefined) {
+      this.success = args.success;
+    }
+  }
+};
+ytx.ChatService_getServedAdmins_result.prototype = {};
+ytx.ChatService_getServedAdmins_result.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+      if (ftype == Thrift.Type.LIST) {
+        var _size40 = 0;
+        var _rtmp344;
+        this.success = [];
+        var _etype43 = 0;
+        _rtmp344 = input.readListBegin();
+        _etype43 = _rtmp344.etype;
+        _size40 = _rtmp344.size;
+        for (var _i45 = 0; _i45 < _size40; ++_i45)
+        {
+          var elem46 = null;
+          elem46 = input.readString();
+          this.success.push(elem46);
+        }
+        input.readListEnd();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+ytx.ChatService_getServedAdmins_result.prototype.write = function(output) {
+  output.writeStructBegin('ChatService_getServedAdmins_result');
+  if (this.success !== null && this.success !== undefined) {
+    output.writeFieldBegin('success', Thrift.Type.LIST, 0);
+    output.writeListBegin(Thrift.Type.STRING, this.success.length);
+    for (var iter47 in this.success)
+    {
+      if (this.success.hasOwnProperty(iter47))
+      {
+        iter47 = this.success[iter47];
+        output.writeString(iter47);
       }
     }
     output.writeListEnd();
@@ -1322,167 +949,6 @@ ytx.ChatServiceClient.prototype.recv_unsubscribe = function(input,mtype,rseqid) 
 
   callback(null)
 };
-ytx.ChatServiceClient.prototype.createContentChannel = function(cmsChannelId, callback) {
-  this.seqid += 1;
-  this._reqs[this.seqid] = callback;
-  this.send_createContentChannel(cmsChannelId);
-};
-
-ytx.ChatServiceClient.prototype.send_createContentChannel = function(cmsChannelId) {
-  var output = new this.pClass(this.output);
-  output.writeMessageBegin('createContentChannel', Thrift.MessageType.CALL, this.seqid);
-  var args = new ytx.ChatService_createContentChannel_args();
-  args.cmsChannelId = cmsChannelId;
-  args.write(output);
-  output.writeMessageEnd();
-  return this.output.flush();
-};
-
-ytx.ChatServiceClient.prototype.recv_createContentChannel = function(input,mtype,rseqid) {
-  var callback = this._reqs[rseqid] || function() {};
-  delete this._reqs[rseqid];
-  if (mtype == Thrift.MessageType.EXCEPTION) {
-    var x = new Thrift.TApplicationException();
-    x.read(input);
-    input.readMessageEnd();
-    return callback(x);
-  }
-  var result = new ytx.ChatService_createContentChannel_result();
-  result.read(input);
-  input.readMessageEnd();
-
-  if (null !== result.success) {
-    return callback(null, result.success);
-  }
-  return callback('createContentChannel failed: unknown result');
-};
-ytx.ChatServiceClient.prototype.deleteChannel = function(channelId, callback) {
-  this.seqid += 1;
-  this._reqs[this.seqid] = callback;
-  this.send_deleteChannel(channelId);
-};
-
-ytx.ChatServiceClient.prototype.send_deleteChannel = function(channelId) {
-  var output = new this.pClass(this.output);
-  output.writeMessageBegin('deleteChannel', Thrift.MessageType.CALL, this.seqid);
-  var args = new ytx.ChatService_deleteChannel_args();
-  args.channelId = channelId;
-  args.write(output);
-  output.writeMessageEnd();
-  return this.output.flush();
-};
-
-ytx.ChatServiceClient.prototype.recv_deleteChannel = function(input,mtype,rseqid) {
-  var callback = this._reqs[rseqid] || function() {};
-  delete this._reqs[rseqid];
-  if (mtype == Thrift.MessageType.EXCEPTION) {
-    var x = new Thrift.TApplicationException();
-    x.read(input);
-    input.readMessageEnd();
-    return callback(x);
-  }
-  var result = new ytx.ChatService_deleteChannel_result();
-  result.read(input);
-  input.readMessageEnd();
-
-  callback(null)
-};
-ytx.ChatServiceClient.prototype.addAdminIntoChannel = function(channelId, userIds, callback) {
-  this.seqid += 1;
-  this._reqs[this.seqid] = callback;
-  this.send_addAdminIntoChannel(channelId, userIds);
-};
-
-ytx.ChatServiceClient.prototype.send_addAdminIntoChannel = function(channelId, userIds) {
-  var output = new this.pClass(this.output);
-  output.writeMessageBegin('addAdminIntoChannel', Thrift.MessageType.CALL, this.seqid);
-  var args = new ytx.ChatService_addAdminIntoChannel_args();
-  args.channelId = channelId;
-  args.userIds = userIds;
-  args.write(output);
-  output.writeMessageEnd();
-  return this.output.flush();
-};
-
-ytx.ChatServiceClient.prototype.recv_addAdminIntoChannel = function(input,mtype,rseqid) {
-  var callback = this._reqs[rseqid] || function() {};
-  delete this._reqs[rseqid];
-  if (mtype == Thrift.MessageType.EXCEPTION) {
-    var x = new Thrift.TApplicationException();
-    x.read(input);
-    input.readMessageEnd();
-    return callback(x);
-  }
-  var result = new ytx.ChatService_addAdminIntoChannel_result();
-  result.read(input);
-  input.readMessageEnd();
-
-  callback(null)
-};
-ytx.ChatServiceClient.prototype.removeAdminFromChannel = function(channelId, userIds, callback) {
-  this.seqid += 1;
-  this._reqs[this.seqid] = callback;
-  this.send_removeAdminFromChannel(channelId, userIds);
-};
-
-ytx.ChatServiceClient.prototype.send_removeAdminFromChannel = function(channelId, userIds) {
-  var output = new this.pClass(this.output);
-  output.writeMessageBegin('removeAdminFromChannel', Thrift.MessageType.CALL, this.seqid);
-  var args = new ytx.ChatService_removeAdminFromChannel_args();
-  args.channelId = channelId;
-  args.userIds = userIds;
-  args.write(output);
-  output.writeMessageEnd();
-  return this.output.flush();
-};
-
-ytx.ChatServiceClient.prototype.recv_removeAdminFromChannel = function(input,mtype,rseqid) {
-  var callback = this._reqs[rseqid] || function() {};
-  delete this._reqs[rseqid];
-  if (mtype == Thrift.MessageType.EXCEPTION) {
-    var x = new Thrift.TApplicationException();
-    x.read(input);
-    input.readMessageEnd();
-    return callback(x);
-  }
-  var result = new ytx.ChatService_removeAdminFromChannel_result();
-  result.read(input);
-  input.readMessageEnd();
-
-  callback(null)
-};
-ytx.ChatServiceClient.prototype.sendMessage = function(channelId, centent, callback) {
-  this.seqid += 1;
-  this._reqs[this.seqid] = callback;
-  this.send_sendMessage(channelId, centent);
-};
-
-ytx.ChatServiceClient.prototype.send_sendMessage = function(channelId, centent) {
-  var output = new this.pClass(this.output);
-  output.writeMessageBegin('sendMessage', Thrift.MessageType.CALL, this.seqid);
-  var args = new ytx.ChatService_sendMessage_args();
-  args.channelId = channelId;
-  args.centent = centent;
-  args.write(output);
-  output.writeMessageEnd();
-  return this.output.flush();
-};
-
-ytx.ChatServiceClient.prototype.recv_sendMessage = function(input,mtype,rseqid) {
-  var callback = this._reqs[rseqid] || function() {};
-  delete this._reqs[rseqid];
-  if (mtype == Thrift.MessageType.EXCEPTION) {
-    var x = new Thrift.TApplicationException();
-    x.read(input);
-    input.readMessageEnd();
-    return callback(x);
-  }
-  var result = new ytx.ChatService_sendMessage_result();
-  result.read(input);
-  input.readMessageEnd();
-
-  callback(null)
-};
 ytx.ChatServiceClient.prototype.sendContent = function(channelId, contentId, callback) {
   this.seqid += 1;
   this._reqs[this.seqid] = callback;
@@ -1550,6 +1016,41 @@ ytx.ChatServiceClient.prototype.recv_getChatHistory = function(input,mtype,rseqi
     return callback(null, result.success);
   }
   return callback('getChatHistory failed: unknown result');
+};
+ytx.ChatServiceClient.prototype.getServedAdmins = function(userId, channelId, callback) {
+  this.seqid += 1;
+  this._reqs[this.seqid] = callback;
+  this.send_getServedAdmins(userId, channelId);
+};
+
+ytx.ChatServiceClient.prototype.send_getServedAdmins = function(userId, channelId) {
+  var output = new this.pClass(this.output);
+  output.writeMessageBegin('getServedAdmins', Thrift.MessageType.CALL, this.seqid);
+  var args = new ytx.ChatService_getServedAdmins_args();
+  args.userId = userId;
+  args.channelId = channelId;
+  args.write(output);
+  output.writeMessageEnd();
+  return this.output.flush();
+};
+
+ytx.ChatServiceClient.prototype.recv_getServedAdmins = function(input,mtype,rseqid) {
+  var callback = this._reqs[rseqid] || function() {};
+  delete this._reqs[rseqid];
+  if (mtype == Thrift.MessageType.EXCEPTION) {
+    var x = new Thrift.TApplicationException();
+    x.read(input);
+    input.readMessageEnd();
+    return callback(x);
+  }
+  var result = new ytx.ChatService_getServedAdmins_result();
+  result.read(input);
+  input.readMessageEnd();
+
+  if (null !== result.success) {
+    return callback(null, result.success);
+  }
+  return callback('getServedAdmins failed: unknown result');
 };
 ytx.ChatServiceProcessor = exports.Processor = function(handler) {
   this._handler = handler
@@ -1621,71 +1122,6 @@ ytx.ChatServiceProcessor.prototype.process_unsubscribe = function(seqid, input, 
   })
 }
 
-ytx.ChatServiceProcessor.prototype.process_createContentChannel = function(seqid, input, output) {
-  var args = new ytx.ChatService_createContentChannel_args();
-  args.read(input);
-  input.readMessageEnd();
-  this._handler.createContentChannel(args.cmsChannelId, function (err, result) {
-    var result = new ytx.ChatService_createContentChannel_result((err != null ? err : {success: result}));
-    output.writeMessageBegin("createContentChannel", Thrift.MessageType.REPLY, seqid);
-    result.write(output);
-    output.writeMessageEnd();
-    output.flush();
-  })
-}
-
-ytx.ChatServiceProcessor.prototype.process_deleteChannel = function(seqid, input, output) {
-  var args = new ytx.ChatService_deleteChannel_args();
-  args.read(input);
-  input.readMessageEnd();
-  this._handler.deleteChannel(args.channelId, function (err, result) {
-    var result = new ytx.ChatService_deleteChannel_result((err != null ? err : {success: result}));
-    output.writeMessageBegin("deleteChannel", Thrift.MessageType.REPLY, seqid);
-    result.write(output);
-    output.writeMessageEnd();
-    output.flush();
-  })
-}
-
-ytx.ChatServiceProcessor.prototype.process_addAdminIntoChannel = function(seqid, input, output) {
-  var args = new ytx.ChatService_addAdminIntoChannel_args();
-  args.read(input);
-  input.readMessageEnd();
-  this._handler.addAdminIntoChannel(args.channelId, args.userIds, function (err, result) {
-    var result = new ytx.ChatService_addAdminIntoChannel_result((err != null ? err : {success: result}));
-    output.writeMessageBegin("addAdminIntoChannel", Thrift.MessageType.REPLY, seqid);
-    result.write(output);
-    output.writeMessageEnd();
-    output.flush();
-  })
-}
-
-ytx.ChatServiceProcessor.prototype.process_removeAdminFromChannel = function(seqid, input, output) {
-  var args = new ytx.ChatService_removeAdminFromChannel_args();
-  args.read(input);
-  input.readMessageEnd();
-  this._handler.removeAdminFromChannel(args.channelId, args.userIds, function (err, result) {
-    var result = new ytx.ChatService_removeAdminFromChannel_result((err != null ? err : {success: result}));
-    output.writeMessageBegin("removeAdminFromChannel", Thrift.MessageType.REPLY, seqid);
-    result.write(output);
-    output.writeMessageEnd();
-    output.flush();
-  })
-}
-
-ytx.ChatServiceProcessor.prototype.process_sendMessage = function(seqid, input, output) {
-  var args = new ytx.ChatService_sendMessage_args();
-  args.read(input);
-  input.readMessageEnd();
-  this._handler.sendMessage(args.channelId, args.centent, function (err, result) {
-    var result = new ytx.ChatService_sendMessage_result((err != null ? err : {success: result}));
-    output.writeMessageBegin("sendMessage", Thrift.MessageType.REPLY, seqid);
-    result.write(output);
-    output.writeMessageEnd();
-    output.flush();
-  })
-}
-
 ytx.ChatServiceProcessor.prototype.process_sendContent = function(seqid, input, output) {
   var args = new ytx.ChatService_sendContent_args();
   args.read(input);
@@ -1706,6 +1142,19 @@ ytx.ChatServiceProcessor.prototype.process_getChatHistory = function(seqid, inpu
   this._handler.getChatHistory(args.userId, args.channelId, args.lastUpdateTime, function (err, result) {
     var result = new ytx.ChatService_getChatHistory_result((err != null ? err : {success: result}));
     output.writeMessageBegin("getChatHistory", Thrift.MessageType.REPLY, seqid);
+    result.write(output);
+    output.writeMessageEnd();
+    output.flush();
+  })
+}
+
+ytx.ChatServiceProcessor.prototype.process_getServedAdmins = function(seqid, input, output) {
+  var args = new ytx.ChatService_getServedAdmins_args();
+  args.read(input);
+  input.readMessageEnd();
+  this._handler.getServedAdmins(args.userId, args.channelId, function (err, result) {
+    var result = new ytx.ChatService_getServedAdmins_result((err != null ? err : {success: result}));
+    output.writeMessageBegin("getServedAdmins", Thrift.MessageType.REPLY, seqid);
     result.write(output);
     output.writeMessageEnd();
     output.flush();

@@ -1,0 +1,67 @@
+namespace java ytx
+namespace js ytx
+
+struct Customer
+  string id
+  string name
+  string memo
+  i32    type
+  i32    level
+
+
+struct CustomerDetail
+  string id
+  string name
+  string memo
+  i32    type
+  i32    level
+
+struct Message
+  string id
+  i32 type
+  string datetime
+  string content
+  string csrId
+  string csrName
+  string customerId
+  string customerName
+
+struct CSRInfo
+  string id
+  string name
+  string title
+  string memo
+
+typedef list<string> ( cpp.template = "std::list" ) CustomerIdList
+typedef list<Customer> ( cpp.template = "std::list" ) CustomerList
+typedef list<string> ( cpp.template = "std::list" ) CSRIdList
+typedef list<Message> ( cpp.template = "std::list" ) MessageList
+
+
+service ICRMService
+  //绑定用户和CSR
+  bindCSR(string customerId, string newCSRId)
+  //更换一个用户的服务人员
+  replaceCSRForOneGroupCustomers(string oldCSRId, string newCSRId)
+  //获取客户信息列表
+  CustomerList getCusomterList(CustomerIdList ids)
+  //获取客户详细信息
+  Customer getCusomterById(string customerId)
+  //设置用户信息
+  setCustomerInfo(CustomerDetail customerDetail)
+  //获取CSR信息
+  CSRInfo getCSRInfoById(string customerId)
+
+service ICSRChatMessage
+  //向这个CSR所负责的所有客户发送消息
+  sendContent(string content, string csrId)
+  //获取聊天记录
+  MessageList getChatHistory(string customerId, i32 lastUpdateTime)
+  //获取未读消息
+  MessageList getUnreadMessagesHistory(string csrId, i32 lastUpdateTime)
+
+service ICustomerChatService
+  //获取聊天记录
+  MessageList getChatHistory(string customerId, i32 lastUpdateTime)
+
+

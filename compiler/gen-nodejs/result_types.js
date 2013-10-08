@@ -12,6 +12,8 @@ ytx.Channel = module.exports.Channel = function(args) {
   this.id = null;
   this.name = null;
   this.type = null;
+  this.description = null;
+  this.memberCount = null;
   if (args) {
     if (args.id !== undefined) {
       this.id = args.id;
@@ -21,6 +23,12 @@ ytx.Channel = module.exports.Channel = function(args) {
     }
     if (args.type !== undefined) {
       this.type = args.type;
+    }
+    if (args.description !== undefined) {
+      this.description = args.description;
+    }
+    if (args.memberCount !== undefined) {
+      this.memberCount = args.memberCount;
     }
   }
 };
@@ -59,6 +67,20 @@ ytx.Channel.prototype.read = function(input) {
         input.skip(ftype);
       }
       break;
+      case 4:
+      if (ftype == Thrift.Type.STRING) {
+        this.description = input.readString();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 5:
+      if (ftype == Thrift.Type.I32) {
+        this.memberCount = input.readI32();
+      } else {
+        input.skip(ftype);
+      }
+      break;
       default:
         input.skip(ftype);
     }
@@ -83,6 +105,16 @@ ytx.Channel.prototype.write = function(output) {
   if (this.type !== null && this.type !== undefined) {
     output.writeFieldBegin('type', Thrift.Type.I32, 3);
     output.writeI32(this.type);
+    output.writeFieldEnd();
+  }
+  if (this.description !== null && this.description !== undefined) {
+    output.writeFieldBegin('description', Thrift.Type.STRING, 4);
+    output.writeString(this.description);
+    output.writeFieldEnd();
+  }
+  if (this.memberCount !== null && this.memberCount !== undefined) {
+    output.writeFieldBegin('memberCount', Thrift.Type.I32, 5);
+    output.writeI32(this.memberCount);
     output.writeFieldEnd();
   }
   output.writeFieldStop();
