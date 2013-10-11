@@ -3,9 +3,10 @@ namespace js ytx
 struct Customer{
   1:string id
   2:string name
-  3:string memo
-  4:i32 type
-  5:i32 level
+  3:optional string csrId
+  4:string memo
+  5:i32 type
+  6:i32 level
 }
 
 struct CustomerDetail{
@@ -42,11 +43,14 @@ service ICRMService{
   //绑定用户和CSR
   void bindCSR(1:string customerId,2:string newCSRId)
 
+  //获取对应的CSR信息
+  CSRInfo getRelatedCSRInfoByCusomterId(1:string customerId)
+
   //更换一个用户的服务人员
-  void replaceCSRForOneGroupCustomers(1:string oldCSRId,2:string newCSRId)
+  void replaceCSRofGroup(1:string oldCSRId,2:string newCSRId)
 
   //获取客户信息列表
-  CustomerList getCusomterList(1:CustomerIdList ids)
+  CustomerList getCusomterListByCSRId(1:string csrId)
 
   //获取客户详细信息
   Customer getCusomterById(1:string customerId)
@@ -54,8 +58,7 @@ service ICRMService{
   //设置用户信息
   void setCustomerInfo(1:CustomerDetail customerDetail)
 
-  //获取CSR信息
-  CSRInfo getCSRInfoById(1:string customerId)
+  CSRInfo csrLogin(1:string csrName,2:string password)
 
 }
 

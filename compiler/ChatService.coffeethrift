@@ -4,6 +4,7 @@ namespace js ytx
 struct Customer
   string id
   string name
+  string csrId?
   string memo
   i32    type
   i32    level
@@ -39,18 +40,26 @@ typedef list<Message> ( cpp.template = "std::list" ) MessageList
 
 
 service ICRMService
+
   //绑定用户和CSR
   bindCSR(string customerId, string newCSRId)
+
+  //获取对应的CSR信息
+  CSRInfo getRelatedCSRInfoByCusomterId(string customerId)
+
   //更换一个用户的服务人员
-  replaceCSRForOneGroupCustomers(string oldCSRId, string newCSRId)
+  replaceCSRofGroup(string oldCSRId, string newCSRId)
+
   //获取客户信息列表
-  CustomerList getCusomterList(CustomerIdList ids)
+  CustomerList getCusomterListByCSRId(string csrId)
+
   //获取客户详细信息
   Customer getCusomterById(string customerId)
+
   //设置用户信息
   setCustomerInfo(CustomerDetail customerDetail)
-  //获取CSR信息
-  CSRInfo getCSRInfoById(string customerId)
+
+  CSRInfo csrLogin(string csrName, string password)
 
 service ICSRChatMessage
   //向这个CSR所负责的所有客户发送消息

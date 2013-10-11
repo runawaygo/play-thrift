@@ -14,7 +14,7 @@
     "chai": ""
   },
   "scripts": {
-    "test": "make test-all",
+    "test": "make test",
     "blanket": {
       "pattern": "wechat/lib",
       "data-cover-flags": {
