@@ -57,8 +57,16 @@ class Parser
 
           until @moveNext()[0] is ')'
             @tokenNo++ if @current()[0] isnt 'IDENTIFIER'
-            debugger
             method.addChild new nodes.Field @current()[1], @moveNext()[1]
+
+          #throws(type name):throws(1:type name)
+          if @moveNext()[1] is 'throws'
+            @moveNext()
+            method.setException @moveNext()[1], @moveNext()[1]
+            @moveNext()
+          else 
+            @movePrev()
+
 
         when 'MATH', 'REGEX'
           service.addChild @parseComment()
@@ -70,9 +78,7 @@ class Parser
     if @current()[0] is 'MATH'
       buff.push '/'
       until @moveNext()[1] is "/"
-        # buff.push '  ' if @current().spaced
         buff.push @current()[1]
-        # buff.push '\n' if @current().newLine
       buff.push '/'
     else
       buff.push '//'
@@ -92,7 +98,7 @@ class Parser
       switch @current()[0]
         when 'IDENTIFIER'
           field = new nodes.Field @current()[1], @moveNext()[1]
-          if next()[1] is '?'
+          if @next()[1] is '?'
             field.isOptional = true
             @moveNext()
             
@@ -112,7 +118,6 @@ class Parser
       switch @current()[0]
         when 'IDENTIFIER'
           field = new nodes.Field @current()[1], @moveNext()[1]
-          console.log @next()
           if @next()[1] is '?'
             field.isOptional = true
             @moveNext()

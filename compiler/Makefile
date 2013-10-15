@@ -10,4 +10,8 @@ test:
     $(MOCHA_OPTS) \
     $(TESTS)
 
+compile:
+	coffee compile.coffee ${FILE}
+	thrift --gen js:node ${FILE}.thrift
+
 .PHONY: all test clean

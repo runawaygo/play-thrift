@@ -42,7 +42,9 @@ class Compiler
               for argument,index in childNode.nodes
                 @arguments.push (index+1)+":"+argument.fieldType+" "+argument.name
               @buff.push @arguments.join(',')
-              @buff.push ")\n\n"
+              @buff.push ")"
+              @buff.push " throws(1:#{childNode.exception.type} #{childNode.exception.name})" if childNode.exception
+              @buff.push "\n\n"
             when 'comment'
               @buff.push "  "+childNode.value
         @buff.push "}\n"

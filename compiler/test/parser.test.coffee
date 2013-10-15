@@ -13,14 +13,14 @@ describe 'Parser', ->
 
   it 'parse', ->
     console.log __dirname
-    console.log __dirname+'/test.cthrift'
-    code = fs.readFileSync(__dirname+'/test.cthrift', 'utf-8')
+    console.log __dirname+'/test.coffeethrift'
+    code = fs.readFileSync(__dirname+'/test.coffeethrift', 'utf-8')
     console.log code
     parser = new Parser code
     parser.parse()
 
   it 'parse + compile', ->
-    code = fs.readFileSync(__dirname+'/test.cthrift', 'utf-8')
+    code = fs.readFileSync(__dirname+'/test.coffeethrift', 'utf-8')
     parser = new Parser code
     parser.parse()
 
@@ -28,5 +28,5 @@ describe 'Parser', ->
     compiler.compile()
 
   it 'package test', ->
-    code = fs.readFileSync(__dirname+'/test.cthrift', 'utf-8')
+    code = fs.readFileSync(__dirname+'/test.coffeethrift', 'utf-8')
     console.log coffee2thrift.parse code

@@ -3,11 +3,16 @@ namespace js ytx
 
 struct Customer
   string id
+  string username
   string name
   string csrId?
   string memo
   i32    type
-  i32    level
+
+struct CSRInfo
+  i32 id
+  string name
+  string memo
 
 
 struct CustomerDetail
@@ -22,44 +27,49 @@ struct Message
   i32 type
   string datetime
   string content
-  string csrId
-  string csrName
-  string customerId
-  string customerName
+  string fromId
+  string fromName
+  string toId
+  string toName
+  bool   isRead
 
-struct CSRInfo
-  string id
-  string name
-  string title
-  string memo
-
-typedef list<string> ( cpp.template = "std::list" ) CustomerIdList
 typedef list<Customer> ( cpp.template = "std::list" ) CustomerList
-typedef list<string> ( cpp.template = "std::list" ) CSRIdList
 typedef list<Message> ( cpp.template = "std::list" ) MessageList
 
+// 1.用户不存在. 2. 密码错误
+exception csr_error
+  i32 type
+  string message
+
+// 1.CSR不存在. 2.Customer不存在
+exception bind_error
+  i32 type
+  string message
 
 service ICRMService
+  //CSR login
+  i32 csrLogin(string csrName, string password) throws (csr_error error)
+
+  //获取CSR信息
+  CSRInfo getCSRInfoByCSRId(i32 csrId) throws (bind_error error)
 
   //绑定用户和CSR
-  bindCSR(string customerId, string newCSRId)
+  bindCSR(string username, i32 newCSRId) throws (bind_error error)
 
   //获取对应的CSR信息
-  CSRInfo getRelatedCSRInfoByCusomterId(string customerId)
-
-  //更换一个用户的服务人员
-  replaceCSRofGroup(string oldCSRId, string newCSRId)
+  CSRInfo getRelatedCSRInfoByUsername(string username) throws (csr_error error)
 
   //获取客户信息列表
-  CustomerList getCusomterListByCSRId(string csrId)
+  CustomerList getCusomterListByCSRId(i32 csrId) throws (csr_error error)
 
+  //暂不实现
   //获取客户详细信息
-  Customer getCusomterById(string customerId)
+  CustomerDetail getCusomterByUsername(string username)
 
+  //暂不实现
   //设置用户信息
   setCustomerInfo(CustomerDetail customerDetail)
 
-  CSRInfo csrLogin(string csrName, string password)
 
 service ICSRChatMessage
   //向这个CSR所负责的所有客户发送消息
