@@ -60,7 +60,7 @@ service ICRMService{
   CSRInfo getCSRInfoByCSRId(1:i32 csrId) throws(1:bind_error error)
 
   //绑定用户和CSR
-  void bindCSR(1:string username,2:i32 newCSRId) throws(1:bind_error error)
+  i32 bindCSR(1:string username,2:i32 newCSRId) throws(1:bind_error error)
 
   //获取对应的CSR信息
   CSRInfo getRelatedCSRInfoByUsername(1:string username) throws(1:csr_error error)
@@ -68,9 +68,8 @@ service ICRMService{
   //获取客户信息列表
   CustomerList getCusomterListByCSRId(1:i32 csrId) throws(1:csr_error error)
 
-  //暂不实现
   //获取客户详细信息
-  CustomerDetail getCusomterByUsername(1:string username)
+  Customer getCusomterByUsername(1:string username,2:i32 csrId)
 
   //暂不实现
   //设置用户信息
