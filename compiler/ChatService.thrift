@@ -1,18 +1,24 @@
 namespace java ytx
 namespace js ytx
+
+//status: 0.未激活 1.激活体验 2.激活 3.激活休眠
+//level: 0.A类 1.B类 2.C类
 struct Customer{
   1:string id
   2:string username
   3:string name
-  4:optional string csrId
+  4:optional i32 csrId
   5:string memo
-  6:i32 type
+  6:i32 status
+  7:i32 level
+  8:optional string avatar
 }
 
 struct CSRInfo{
   1:i32 id
   2:string name
   3:string memo
+  4:optional string avatar
 }
 
 struct CustomerDetail{
@@ -37,7 +43,8 @@ struct Message{
 
 typedef list<Customer> ( cpp.template = "std::list" ) CustomerList
 typedef list<Message> ( cpp.template = "std::list" ) MessageList
-//1.用户不存在.2.密码错误
+typedef list<string> ( cpp.template = "std::list" ) UsernameList
+//1.用户不存在.2.密码错误.3.Customer不存在
 
 exception csr_error{
   1:i32 type
@@ -67,6 +74,9 @@ service ICRMService{
 
   //获取客户信息列表
   CustomerList getCusomterListByCSRId(1:i32 csrId) throws(1:csr_error error)
+
+  //获取对应的CSR信息
+  UsernameList getCustomerUsernameList(1:i32 csrId,2:i32 customerStatus) throws(1:csr_error error)
 
   //获取客户详细信息
   Customer getCusomterByUsername(1:string username,2:i32 csrId)
