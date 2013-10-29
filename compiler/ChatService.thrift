@@ -1,8 +1,9 @@
 namespace java ytx
 namespace js ytx
+//status:0.未激活1.激活体验2.激活3.激活休眠
 
-//status: 0.未激活 1.激活体验 2.激活 3.激活休眠
-//level: 0.A类 1.B类 2.C类
+//level:0.A类1.B类2.C类
+
 struct Customer{
   1:string id
   2:string username
@@ -16,9 +17,10 @@ struct Customer{
 
 struct CSRInfo{
   1:i32 id
-  2:string name
-  3:string memo
-  4:optional string avatar
+  2:string jobNumber
+  3:string name
+  4:string memo
+  5:optional string avatar
 }
 
 struct CustomerDetail{
@@ -59,8 +61,7 @@ exception bind_error{
 }
 
 service ICRMService{
-  //  CSR login()
-
+  //CSRlogin
   i32 csrLogin(1:string csrName,2:string password) throws(1:csr_error error)
 
   //获取CSR信息
@@ -80,6 +81,9 @@ service ICRMService{
 
   //获取客户详细信息
   Customer getCusomterByUsername(1:string username,2:i32 csrId)
+
+  //发送回电提醒
+  void phoneCallback(1:string username,2:i32 csrId) throws(1:csr_error error)
 
   //暂不实现
   //设置用户信息

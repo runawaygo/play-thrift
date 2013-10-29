@@ -1,8 +1,8 @@
 namespace java ytx
 namespace js ytx
 
-//status: 0.未激活 1.激活体验 2.激活 3.激活休眠
-//level: 0.A类 1.B类 2.C类
+// status: 0.未激活 1.激活体验 2.激活 3.激活休眠
+// level: 0.A类 1.B类 2.C类 
 struct Customer
   string id
   string username
@@ -15,6 +15,7 @@ struct Customer
 
 struct CSRInfo
   i32 id
+  string jobNumber
   string name
   string memo
   string avatar?
@@ -42,7 +43,7 @@ typedef list<Customer> ( cpp.template = "std::list" ) CustomerList
 typedef list<Message> ( cpp.template = "std::list" ) MessageList
 typedef list<string> ( cpp.template = "std::list" ) UsernameList
 
-// 1.用户不存在. 2. 密码错误. 3.Customer不存在
+// 1.用户不存在. 2. 密码错误. 3.Customer不存在 
 exception csr_error
   i32 type
   string message
@@ -53,30 +54,34 @@ exception bind_error
   string message
 
 service ICRMService
-  //CSR login
+
+  // CSR login
   i32 csrLogin(string csrName, string password) throws (csr_error error)
 
-  //获取CSR信息
+  // 获取CSR信息
   CSRInfo getCSRInfoByCSRId(i32 csrId) throws (bind_error error)
 
-  //绑定用户和CSR
+  // 绑定用户和CSR
   i32 bindCSR(string username, i32 newCSRId) throws (bind_error error)
 
-  //获取对应的CSR信息
+  // 获取对应的CSR信息
   CSRInfo getRelatedCSRInfoByUsername(string username) throws (csr_error error)
 
 
-  //获取客户信息列表
+  // 获取客户信息列表
   CustomerList getCusomterListByCSRId(i32 csrId) throws (csr_error error)
 
-  //获取对应的CSR信息
+  // 获取对应的CSR信息
   UsernameList getCustomerUsernameList(i32 csrId, i32 customerStatus) throws (csr_error error)
 
-  //获取客户详细信息
+  // 获取客户详细信息
   Customer getCusomterByUsername(string username, i32 csrId)
 
-  //暂不实现
-  //设置用户信息
+  // 发送回电提醒
+  phoneCallback(string username, i32 csrId) throws (csr_error error)
+
+  // 暂不实现
+  // 设置用户信息
   setCustomerInfo(CustomerDetail customerDetail)
 
 
